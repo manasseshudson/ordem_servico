@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AutoService Pro - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#545f73",
+                    "on-tertiary-fixed": "#002113",
+                    "on-error-container": "#93000a",
+                    "on-surface-variant": "#424754",
+                    "surface-tint": "#005ac2",
+                    "on-primary": "#ffffff",
+                    "primary-container": "#2170e4",
+                    "secondary-fixed": "#d8e3fb",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary-fixed": "#001a42",
+                    "surface-dim": "#d8d9e3",
+                    "on-primary-container": "#fefcff",
+                    "on-secondary-container": "#586377",
+                    "inverse-primary": "#adc6ff",
+                    "surface": "#f9f9ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#d8e2ff",
+                    "surface-bright": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "on-background": "#191b23",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-secondary-fixed": "#111c2d",
+                    "tertiary-container": "#00855b",
+                    "surface-container-low": "#f2f3fd",
+                    "outline-variant": "#c2c6d6",
+                    "surface-variant": "#e1e2ec",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "primary-fixed-dim": "#adc6ff",
+                    "inverse-surface": "#2e3038",
+                    "surface-container-high": "#e6e7f2",
+                    "tertiary": "#006947",
+                    "on-surface": "#191b23",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#004395",
+                    "inverse-on-surface": "#eff0fa",
+                    "outline": "#727785",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#f5fff6",
+                    "surface-container": "#ecedf7",
+                    "primary": "#0058be",
+                    "surface-container-highest": "#e1e2ec",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#d5e0f8",
+                    "background": "#f9f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "gutter": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "container-margin": "24px",
+                    "sidebar-width": "260px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "mono-md": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "mono-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f9f9ff;
+            color: #191b23;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Mobile menu transition */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden md:overflow-hidden">
+<!-- Sidebar Overlay for Mobile -->
+<div class="fixed inset-0 bg-black/50 z-[45] hidden lg:hidden" id="sidebar-overlay"></div>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm flex flex-col p-md gap-sm z-50 -translate-x-full lg:translate-x-0" id="sidebar">
+<div class="mb-lg px-md flex justify-between items-center">
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">AutoService Pro</h1>
+<p class="text-label-md text-secondary uppercase tracking-widest mt-1">Main Terminal</p>
+</div>
+<button class="lg:hidden p-2 text-secondary hover:bg-surface-container rounded-full" id="close-sidebar">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex-1 flex flex-col gap-xs overflow-y-auto hide-scrollbar">
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-lg active:scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-on-surface-variant rounded-lg transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">car_repair</span>
+<span>Service Orders</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-on-surface-variant rounded-lg transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Clients</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-on-surface-variant rounded-lg transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span>Vehicles</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-on-surface-variant rounded-lg transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span>Reports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-secondary dark:text-secondary-fixed-dim hover:bg-surface-container dark:hover:bg-on-surface-variant rounded-lg transition-colors active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-md px-md flex items-center gap-md">
+<img alt="Service Advisor Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9i_z4ZVIITCB-U6AHglS27FXdfXab3SfPN1Dfm5Cg0t0ROdzKLo0h4shVmA_1PrfFmpf3G7N5pd3MRmFqK8sCF0SriWI8EG8CjRkUZsgyNFxhCglIBVMM0n2QSPHR-Xph4YJvtW2zFkAlqaAV4fOJkwBPTqQukcm68IIUvQlHvCQDhxBnGnrnZ8hipDIKJSz7Qwur9hcm6YSNMLAB5JfhCr8Y0Xylb8u6199iEWmdG0N4cBeUGX_00ih3gJ4EET7pP97BHng6DG4"/>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Ricardo Silva</span>
+<span class="text-label-md text-secondary">Advisor Senior</span>
+</div>
+</div>
+</aside>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant z-40 flex justify-around items-center h-16 lg:hidden">
+<a class="flex flex-col items-center justify-center text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px]">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary" href="#">
+<span class="material-symbols-outlined">car_repair</span>
+<span class="text-[10px]">O.S.</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary" href="#">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[10px]">Frotas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px]">Clientes</span>
+</a>
+<button class="flex flex-col items-center justify-center text-secondary" id="open-sidebar">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-[10px]">Menu</span>
+</button>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 lg:left-[260px] h-16 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center px-gutter lg:px-lg w-auto z-40">
+<div class="flex items-center gap-md lg:gap-lg flex-1">
+<h2 class="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface dark:text-on-primary-fixed shrink-0">Service Hub</h2>
+<div class="relative w-full max-w-md hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 focus:ring-2 focus:ring-primary transition-all font-body-md text-body-md" placeholder="Buscar placa, cliente ou O.S..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="sm:hidden p-2 text-secondary hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="hover:bg-surface-container-low dark:hover:bg-on-secondary-fixed-variant rounded-full p-2 transition-colors relative">
+<span class="material-symbols-outlined text-secondary">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-1 hidden sm:block"></div>
+<img alt="Advisor Avatar" class="w-9 h-9 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnqg2VhKyPrqaaLn4Xr7TGCAHNclHu7zZqCUhmonjIRow0qp7OShq8BwV74u_bZueGIZXa9iA11LU7PRlJ8eVOVm-kkk-i9DNOb_ESgZU2BSryNr9LbtbelkkhtW-R9zBmofpip89LR8ORsayRSWWBIAlqgzJ27kWj0HKlo6s9aw_4FwGWfaQODrXdsXo9Z_LioAI9EKZDCzmgmNnsbIF79BlqbSE8wGkZ0sMdGbGElIS_iAEA2j9RgIXkY7vWyhCU-TnN4YByz5E"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="lg:ml-[260px] mt-16 p-gutter lg:p-lg pb-24 lg:pb-lg h-auto lg:h-[calc(100vh-64px)] lg:overflow-y-auto bg-background">
+<div class="max-w-7xl mx-auto space-y-lg">
+<!-- Metric Cards: 1 column on mobile, 2 on tablet, 4 on desktop -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-md">
+<span class="p-2 bg-primary-container text-on-primary-container rounded-lg">
+<span class="material-symbols-outlined">assignment</span>
+</span>
+<span class="text-tertiary font-bold text-label-md">+12% vs ontem</span>
+</div>
+<p class="text-secondary font-medium">Total de O.S.</p>
+<h3 class="text-headline-xl font-headline-xl mt-1">142</h3>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-md">
+<span class="p-2 bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined">build</span>
+</span>
+<span class="text-secondary font-bold text-label-md">Capacidade 85%</span>
+</div>
+<p class="text-secondary font-medium">Em execução</p>
+<h3 class="text-headline-xl font-headline-xl mt-1">28</h3>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-md">
+<span class="p-2 bg-tertiary-container text-on-tertiary-container rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</span>
+<span class="text-tertiary font-bold text-label-md">Meta batida</span>
+</div>
+<p class="text-secondary font-medium">Concluídas hoje</p>
+<h3 class="text-headline-xl font-headline-xl mt-1">15</h3>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-all group">
+<div class="flex justify-between items-start mb-md">
+<span class="p-2 bg-on-tertiary-fixed-variant text-white rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</span>
+<span class="text-secondary font-bold text-label-md">Médio R$ 850,00</span>
+</div>
+<p class="text-secondary font-medium">Faturamento Diário</p>
+<h3 class="text-headline-xl font-headline-xl mt-1 text-on-surface">R$ 12.750</h3>
+</div>
+</section>
+<!-- Middle Section: Recent Table and Chart -->
+<div class="bento-grid">
+<!-- Recent Orders Table/List -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex flex-col">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md text-on-surface">Ordens de Serviço Recentes</h4>
+<button class="text-primary font-bold text-body-md hover:underline">Ver todas</button>
+</div>
+<!-- Desktop Table View -->
+<div class="hidden md:block overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-label-md text-secondary bg-surface-container-low">
+<th class="px-lg py-md">PLACA</th>
+<th class="px-lg py-md">VEÍCULO</th>
+<th class="px-lg py-md">CLIENTE</th>
+<th class="px-lg py-md">STATUS</th>
+<th class="px-lg py-md">DATA</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-mono-md text-mono-md">ABC-1234</td>
+<td class="px-lg py-md">Toyota Corolla XEi</td>
+<td class="px-lg py-md">Marcos Oliveira</td>
+<td class="px-lg py-md">
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-label-md font-bold">Em Execução</span>
+</td>
+<td class="px-lg py-md text-secondary">Hoje, 09:15</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-mono-md text-mono-md">XYZ-9876</td>
+<td class="px-lg py-md">Honda Civic G10</td>
+<td class="px-lg py-md">Fernanda Costa</td>
+<td class="px-lg py-md">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-label-md font-bold">Finalizada</span>
+</td>
+<td class="px-lg py-md text-secondary">Hoje, 08:30</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-mono-md text-mono-md">KJH-5521</td>
+<td class="px-lg py-md">Jeep Compass Trailhawk</td>
+<td class="px-lg py-md">Roberto Alencar</td>
+<td class="px-lg py-md">
+<span class="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-label-md font-bold">Em Aberto</span>
+</td>
+<td class="px-lg py-md text-secondary">Ontem, 17:45</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-mono-md text-mono-md">PLM-0092</td>
+<td class="px-lg py-md">Volkswagen Nivus</td>
+<td class="px-lg py-md">Ana Beatriz Souza</td>
+<td class="px-lg py-md">
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-label-md font-bold">Em Execução</span>
+</td>
+<td class="px-lg py-md text-secondary">Ontem, 16:20</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md font-mono-md text-mono-md">VGT-3310</td>
+<td class="px-lg py-md">Chevrolet Onix Turbo</td>
+<td class="px-lg py-md">João Victor Mendes</td>
+<td class="px-lg py-md">
+<span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-label-md font-bold">Finalizada</span>
+</td>
+<td class="px-lg py-md text-secondary">Ontem, 14:10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Mobile Card View -->
+<div class="md:hidden divide-y divide-outline-variant">
+<div class="p-md space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-mono-md text-mono-md text-primary">ABC-1234</span>
+<span class="px-2 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold">Em Execução</span>
+</div>
+<div>
+<p class="font-bold">Toyota Corolla XEi</p>
+<p class="text-body-md text-secondary">Marcos Oliveira</p>
+</div>
+<p class="text-label-md text-outline">Hoje, 09:15</p>
+</div>
+<div class="p-md space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-mono-md text-mono-md text-primary">XYZ-9876</span>
+<span class="px-2 py-1 bg-tertiary/10 text-tertiary rounded-full text-[10px] font-bold">Finalizada</span>
+</div>
+<div>
+<p class="font-bold">Honda Civic G10</p>
+<p class="text-body-md text-secondary">Fernanda Costa</p>
+</div>
+<p class="text-label-md text-outline">Hoje, 08:30</p>
+</div>
+<div class="p-md space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-mono-md text-mono-md text-primary">KJH-5521</span>
+<span class="px-2 py-1 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold">Em Aberto</span>
+</div>
+<div>
+<p class="font-bold">Jeep Compass Trailhawk</p>
+<p class="text-body-md text-secondary">Roberto Alencar</p>
+</div>
+<p class="text-label-md text-outline">Ontem, 17:45</p>
+</div>
+</div>
+</div>
+<!-- Productivity Weekly Chart -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex flex-col p-lg">
+<h4 class="font-headline-md text-headline-md text-on-surface mb-lg">Produtividade Semanal</h4>
+<div class="flex-1 flex flex-col justify-end gap-md">
+<div class="flex items-end justify-between h-48 px-2 overflow-x-auto hide-scrollbar">
+<!-- Monday -->
+<div class="flex flex-col items-center gap-sm flex-1 min-w-[32px]">
+<div class="w-full max-w-[24px] bg-primary-container rounded-t-lg transition-all hover:brightness-110" style="height: 60%"></div>
+<span class="text-label-md text-secondary">Seg</span>
+</div>
+<!-- Tuesday -->
+<div class="flex flex-col items-center gap-sm flex-1 min-w-[32px]">
+<div class="w-full max-w-[24px] bg-primary-container rounded-t-lg transition-all hover:brightness-110" style="height: 75%"></div>
+<span class="text-label-md text-secondary">Ter</span>
+</div>
+<!-- Wednesday -->
+<div class="flex flex-col items-center gap-sm flex-1 min-w-[32px]">
+<div class="w-full max-w-[24px] bg-primary rounded-t-lg transition-all hover:brightness-110" style="height: 95%"></div>
+<span class="text-label-md text-secondary font-bold text-primary">Qua</span>
+</div>
+<!-- Thursday -->
+<div class="flex flex-col items-center gap-sm flex-1 min-w-[32px]">
+<div class="w-full max-w-[24px] bg-primary-container rounded-t-lg transition-all hover:brightness-110" style="height: 85%"></div>
+<span class="text-label-md text-secondary">Qui</span>
+</div>
+<!-- Friday -->
+<div class="flex flex-col items-center gap-sm flex-1 min-w-[32px]">
+<div class="w-full max-w-[24px] bg-primary-container rounded-t-lg transition-all hover:brightness-110" style="height: 70%"></div>
+<span class="text-label-md text-secondary">Sex</span>
+</div>
+<!-- Saturday -->
+<div class="flex flex-col items-center gap-sm flex-1 min-w-[32px]">
+<div class="w-full max-w-[24px] bg-outline-variant rounded-t-lg transition-all hover:brightness-110" style="height: 40%"></div>
+<span class="text-label-md text-secondary">Sáb</span>
+</div>
+</div>
+<div class="pt-lg border-t border-outline-variant space-y-md">
+<div class="flex justify-between items-center">
+<span class="text-body-md text-secondary">Média de conclusão</span>
+<span class="font-bold text-on-surface">12.4 O.S./dia</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-secondary">Eficiência técnica</span>
+<span class="text-tertiary font-bold">+5.2% ↑</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Bottom Row -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="bg-surface p-lg rounded-xl border border-outline-variant overflow-hidden relative group">
+<div class="relative z-10">
+<h4 class="text-headline-md font-headline-md text-on-surface mb-xs">Status do Pátio</h4>
+<p class="text-body-md text-secondary mb-lg">Visualização em tempo real das baias de serviço.</p>
+<div class="grid grid-cols-5 gap-sm sm:gap-md">
+<div class="aspect-square bg-tertiary/10 border border-tertiary/20 rounded-lg flex items-center justify-center" title="Baia 1 - Ocupada">
+<span class="material-symbols-outlined text-tertiary text-lg sm:text-2xl">check</span>
+</div>
+<div class="aspect-square bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center animate-pulse" title="Baia 2 - Em Trabalho">
+<span class="material-symbols-outlined text-primary text-lg sm:text-2xl">engineering</span>
+</div>
+<div class="aspect-square bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center" title="Baia 3 - Em Trabalho">
+<span class="material-symbols-outlined text-primary text-lg sm:text-2xl">engineering</span>
+</div>
+<div class="aspect-square bg-surface-container-high border border-outline-variant rounded-lg flex items-center justify-center" title="Baia 4 - Livre">
+<span class="material-symbols-outlined text-outline text-lg sm:text-2xl">add</span>
+</div>
+<div class="aspect-square bg-surface-container-high border border-outline-variant rounded-lg flex items-center justify-center" title="Baia 5 - Livre">
+<span class="material-symbols-outlined text-outline text-lg sm:text-2xl">add</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary text-on-primary p-lg rounded-xl border border-primary-container shadow-lg flex items-center justify-between">
+<div class="flex-1 pr-md">
+<h4 class="text-headline-md font-headline-md mb-xs">Check-in Express</h4>
+<p class="opacity-80 text-body-md line-clamp-2">Abrir nova ordem de serviço rapidamente para clientes preferenciais.</p>
+<button class="mt-md px-lg py-2 bg-white text-primary font-bold rounded-lg hover:bg-surface-container-lowest transition-all">Começar Agora</button>
+</div>
+<span class="material-symbols-outlined text-4xl sm:text-6xl opacity-20 hidden sm:block">speed</span>
+</div>
+</section>
+</div>
+</main>
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const openBtn = document.getElementById('open-sidebar');
+    const closeBtn = document.getElementById('close-sidebar');
+
+    function toggleSidebar() {
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+        document.body.classList.toggle('overflow-hidden');
+    }
+
+    openBtn?.addEventListener('click', toggleSidebar);
+    closeBtn?.addEventListener('click', toggleSidebar);
+    overlay?.addEventListener('click', toggleSidebar);
+
+    // Micro-interactions and state management
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            if(window.innerWidth < 1024 && link.parentElement.tagName === 'NAV' && link.closest('aside')) {
+                toggleSidebar();
+            }
+            
+            // Simplified active state toggle for demo (desktop sidebar only)
+            if(link.closest('aside')) {
+                document.querySelectorAll('aside nav a').forEach(l => {
+                    l.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                    l.classList.add('text-secondary');
+                    const icon = l.querySelector('.material-symbols-outlined');
+                    if(icon) icon.style.fontVariationSettings = "'FILL' 0";
+                });
+                link.classList.add('bg-secondary-container', 'text-on-secondary-container');
+                link.classList.remove('text-secondary');
+                const icon = link.querySelector('.material-symbols-outlined');
+                if(icon) icon.style.fontVariationSettings = "'FILL' 1";
+            }
+        });
+    });
+
+    // Search bar focus effect
+    const searchInputs = document.querySelectorAll('input[type="text"]');
+    searchInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('ring-2', 'ring-primary');
+        });
+        input.addEventListener('blur', () => {
+            input.parentElement.classList.remove('ring-2', 'ring-primary');
+        });
+    });
+</script>
+</body></html>

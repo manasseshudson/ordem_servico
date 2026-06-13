@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | AutoService Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#d8e2ff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#00855b",
+                        "outline-variant": "#c2c6d6",
+                        "inverse-primary": "#adc6ff",
+                        "on-background": "#191b23",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#727785",
+                        "background": "#f9f9ff",
+                        "surface-dim": "#d8d9e3",
+                        "on-tertiary-container": "#f5fff6",
+                        "on-secondary-fixed-variant": "#3c475a",
+                        "secondary-fixed-dim": "#bcc7de",
+                        "secondary-fixed": "#d8e3fb",
+                        "surface-variant": "#e1e2ec",
+                        "secondary": "#545f73",
+                        "on-primary-fixed-variant": "#004395",
+                        "inverse-surface": "#2e3038",
+                        "surface-container": "#ecedf7",
+                        "surface-tint": "#005ac2",
+                        "on-primary-container": "#fefcff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#424754",
+                        "inverse-on-surface": "#eff0fa",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#e1e2ec",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-bright": "#f9f9ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed": "#111c2d",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#d5e0f8",
+                        "tertiary": "#006947",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-high": "#e6e7f2",
+                        "primary": "#0058be",
+                        "on-primary-fixed": "#001a42",
+                        "surface-container-low": "#f2f3fd",
+                        "primary-container": "#2170e4",
+                        "on-surface": "#191b23",
+                        "on-secondary": "#ffffff",
+                        "surface": "#f9f9ff",
+                        "on-secondary-container": "#586377"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "sidebar-width": "260px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "mono-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "mono-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8fafc; /* Level 0 Background per Style Guidance */
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .login-card {
+            background-color: white; /* Level 1 Cards/Surface */
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .glass-texture {
+            background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.02) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-surface-bright dark:bg-on-background">
+<!-- Background Atmospheric Effect -->
+<div class="absolute inset-0 z-0 opacity-40 pointer-events-none glass-texture"></div>
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-fixed rounded-full blur-[100px] opacity-20"></div>
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary-fixed rounded-full blur-[100px] opacity-20"></div>
+<main class="relative z-10 w-full max-w-md px-md">
+<!-- Brand Identity Container -->
+<div class="mb-lg text-center">
+<div class="inline-flex items-center justify-center p-md bg-white rounded-xl shadow-sm border border-outline-variant mb-md">
+<span class="material-symbols-outlined text-primary text-[40px]" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-primary-fixed tracking-tight">AutoService Pro</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Plataforma Avançada de Gestão de Oficinas</p>
+</div>
+<!-- Login Card -->
+<div class="login-card rounded-xl p-xl md:p-xl flex flex-col gap-lg bg-surface-container-lowest">
+<div class="flex flex-col gap-xs">
+<h2 class="font-headline-md text-headline-md text-on-surface">Acesse sua conta</h2>
+<p class="font-label-md text-label-md text-on-surface-variant">Entre com suas credenciais de consultor técnico</p>
+</div>
+<% if (typeof error !== 'undefined' && error) { %>
+<div class="rounded-lg border border-error/30 bg-error-container px-md py-sm text-sm text-on-error-container">
+  <%= error %>
+</div>
+<% } %>
+
+<form class="flex flex-col gap-md" id="loginForm" action="/login" method="post">
+<!-- Email Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant" for="email">Email Corporativo</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-md transition-colors group-focus-within:text-primary" data-icon="mail">mail</span>
+<input class="w-full pl-10 pr-md py-sm border border-outline-variant rounded-lg bg-surface-bright font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="email" name="email" placeholder="nome@autoservicepro.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-xs">
+<div class="flex justify-between items-center">
+<label class="font-label-md text-label-md text-on-surface-variant" for="password">Senha</label>
+<a class="font-label-md text-label-md text-primary hover:underline transition-all" href="#">Esqueci minha senha</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-md transition-colors group-focus-within:text-primary" data-icon="lock">lock</span>
+<input class="w-full pl-10 pr-10 py-sm border border-outline-variant rounded-lg bg-surface-bright font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant transition-colors" onclick="togglePassword()" type="button">
+<span class="material-symbols-outlined text-md" data-icon="visibility" id="passwordIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center gap-sm">
+<input class="w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary transition-colors cursor-pointer" id="remember" name="remember" type="checkbox"/>
+<label class="font-body-md text-body-md text-on-surface cursor-pointer select-none" for="remember">Lembrar-me neste dispositivo</label>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-md rounded-lg shadow-sm hover:bg-primary-container hover:shadow-md active:scale-[0.98] transition-all flex justify-center items-center gap-sm" type="submit">
+<span>Entrar no Sistema</span>
+<span class="material-symbols-outlined text-md" data-icon="login">login</span>
+</button>
+</form>
+<div class="relative py-sm">
+<div class="absolute inset-0 flex items-center">
+<span class="w-full border-t border-outline-variant"></span>
+</div>
+<div class="relative flex justify-center text-xs">
+<span class="px-md bg-surface-container-lowest text-outline-variant font-label-md">OU</span>
+</div>
+</div>
+<!-- Secondary Action -->
+<div class="flex flex-col gap-sm items-center">
+<p class="font-body-md text-body-md text-on-surface-variant">Novo consultor técnico?</p>
+<button class="w-full border border-outline-variant text-on-surface font-label-md text-label-md py-sm rounded-lg hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+                    Solicitar Acesso
+                </button>
+</div>
+</div>
+<!-- Footer Info -->
+<div class="mt-lg flex flex-col md:flex-row justify-between items-center px-sm gap-sm opacity-60">
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 Velocity Systems. All rights reserved.</p>
+<div class="flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline transition-colors" href="#">Termos</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline transition-colors" href="#">Privacidade</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline transition-colors" href="#">Suporte</a>
+</div>
+</div>
+</main>
+<script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordIcon = document.getElementById('passwordIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.innerText = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.innerText = 'visibility';
+            }
+        }
+
+    </script>
+</body></html>
